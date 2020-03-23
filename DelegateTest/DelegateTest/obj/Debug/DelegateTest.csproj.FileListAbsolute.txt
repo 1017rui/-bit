@@ -1,0 +1,6 @@
+E:\qycache\DelegateTest\DelegateTest\bin\Debug\DelegateTest.exe.config
+E:\qycache\DelegateTest\DelegateTest\bin\Debug\DelegateTest.exe
+E:\qycache\DelegateTest\DelegateTest\bin\Debug\DelegateTest.pdb
+E:\qycache\DelegateTest\DelegateTest\obj\Debug\DelegateTest.csprojResolveAssemblyReference.cache
+E:\qycache\DelegateTest\DelegateTest\obj\Debug\DelegateTest.exe
+E:\qycache\DelegateTest\DelegateTest\obj\Debug\DelegateTest.pdb
