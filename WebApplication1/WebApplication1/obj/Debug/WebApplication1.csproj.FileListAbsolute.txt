@@ -1,0 +1,5 @@
+E:\qycache\WebApplication1\WebApplication1\bin\WebApplication1.dll
+E:\qycache\WebApplication1\WebApplication1\bin\WebApplication1.pdb
+E:\qycache\WebApplication1\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
+E:\qycache\WebApplication1\WebApplication1\obj\Debug\WebApplication1.dll
+E:\qycache\WebApplication1\WebApplication1\obj\Debug\WebApplication1.pdb
