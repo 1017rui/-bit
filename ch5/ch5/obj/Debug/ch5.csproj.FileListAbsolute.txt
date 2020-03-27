@@ -1,0 +1,5 @@
+D:\-bit\ch5\ch5\bin\ch5.dll
+D:\-bit\ch5\ch5\bin\ch5.pdb
+D:\-bit\ch5\ch5\obj\Debug\ch5.csprojResolveAssemblyReference.cache
+D:\-bit\ch5\ch5\obj\Debug\ch5.dll
+D:\-bit\ch5\ch5\obj\Debug\ch5.pdb
