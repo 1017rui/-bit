@@ -11,8 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{2D105B66-9D84-482E-98C5-EDB6C35418B8}</ProjectGuid>
-    <RootNamespace>test_3_27</RootNamespace>
+    <ProjectGuid>{9F4B7157-A84C-47C1-94D1-B71895CBEF3C}</ProjectGuid>
+    <RootNamespace>Project1</RootNamespace>
+    <ProjectName>test_3_27</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -46,7 +47,6 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
