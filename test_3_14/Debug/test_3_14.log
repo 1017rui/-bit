@@ -1,4 +1,0 @@
-﻿  test.c
-e:\qycache\test_3_14\test_3_14\test.c(15): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(290) : 参见“scanf”的声明
-  test_3_14.vcxproj -> E:\qycache\test_3_14\Debug\test_3_14.exe
