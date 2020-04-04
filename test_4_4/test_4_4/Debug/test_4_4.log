@@ -1,0 +1,4 @@
+﻿  test.c
+d:\-bit\test_4_4\test_4_4\test.c(279): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(290) : 参见“scanf”的声明
+  test_4_4.vcxproj -> D:\-bit\test_4_4\Debug\test_4_4.exe
