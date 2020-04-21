@@ -9,14 +9,14 @@ public class TestDemo {
            arr.add(i,i);
        }
        arr.display();
-       arr.add(10,112);
+       arr.add(3,112);
        arr.display();
       // arr.getPos(11);
        // System.out.println(arr.contains(112));
        // System.out.println(arr.search(10));
-        arr.setPos(7,67);
+      /*  arr.setPos(7,67);
        arr.display() ;
        arr.remove(112);
-       arr.display();
+       arr.display();*/
     }
 }

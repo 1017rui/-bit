@@ -91,6 +91,9 @@ public class ArraysList {
         //2.[i]=[i+1],把要溢出的元素覆盖掉
         //this.usedSize--;
         int ret=search(toRemove );//找到元素的下标
+        if(ret==-1){
+            System.out.println("没有需要删除的数字！");
+        }
         for(int i=ret;i<this.usedSize-1;i++){
             this.elem[i]=this.elem[i+1];
         }

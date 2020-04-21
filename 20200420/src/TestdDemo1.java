@@ -12,7 +12,7 @@ public class TestdDemo1 {
        // my.display();
        my.addLast(77);
         my.addLast(78);
-        my.addLast(79);
+        my.addLast(11);
         my.addLast(80);
         my.display();
         /*System.out.println(my.contains(80));
