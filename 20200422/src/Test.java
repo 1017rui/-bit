@@ -31,7 +31,7 @@ import java.util.Arrays;
 
     }
 }*/
-//给定两个大小为 m 和 n 的有序数组 nums1 和 nums2。
+/*//给定两个大小为 m 和 n 的有序数组 nums1 和 nums2。
 //请你找出这两个有序数组的中位数，并且要求算法的时间复杂度为 O(log(m + n))。
 //你可以假设 nums1 和 nums2 不会同时为空。
 //示例 1:
@@ -42,7 +42,7 @@ import java.util.Arrays;
 //nums1 = [1, 2]
 //nums2 = [3, 4]
 //则中位数是 (2 + 3)/2 = 2.5
-/*public class Test {
+public class Test {
     public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
         double center = 0;
         int[] num = new int[nums1.length + nums2.length];
@@ -72,14 +72,15 @@ import java.util.Arrays;
         System.out.println(findMedianSortedArrays(nums1, nums2));
     }
 }*/
-//给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
+/*//给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
 //
 //示例:
 //
 //输入: [0,1,0,3,12]
 //输出: [1,3,12,0,0]
-/*public class Test{
-    public static void moveZeroes1(int[] nums) {
+public class Test{
+    //自己写的
+    *//*public static void moveZeroes1(int[] nums) {
         for(int i=0;i<nums.length;i++){
             if(nums[i]==0){
                 for(int j=i;j<nums.length;j++){
@@ -94,15 +95,21 @@ import java.util.Arrays;
                 }
             }
         }
-    }
+    }*//*
+    //大佬的
     public static void moveZeroes (int [] nums){
-        int index=0;
+        int index=0;//把数组中不是零的数存放到下标为它的数组中，并且index++，
+        // 所有非零的数放完之后，index 中的值 刚好是所有非零数的个数
+
+        //先操作非零数，， 因为零反正是放在后面的，记住非零数的个数，剩下的自然是为零的数，之后往后补零就行了。
         for(int i=0;i<nums.length;i++){
             if(nums[i]!=0){
                 nums[index]=nums[i];
                 index++;
             }
         }
+        //index=3
+        //然后把从这个位置开始到数组最后位置中的元素都置为零
         for(int i=index;i<nums.length;i++){
             nums[i]=0;
         }
@@ -124,20 +131,22 @@ import java.util.Arrays;
 //输出: 1
 //解释: 注意，要求返回第三大的数，是指第三大且唯一出现的数。
 //存在两个值为2的数，它们都排第二。
+/*
 public  class Test {
-    public  static int thirdMax(int[] nums) {
-        for(int i=0;i<nums.length;i++){
-            //?
+        public  static int thirdMax(int[] nums) {
+            for(int i=0;i<nums.length;i++){
+                //?
+            }
+            return 1;
         }
-   return 1;
-    }
-    public static void main(String[] args) {
-        int[] arr1 = {3,2,1};
-        int[] arr2 = {1,2};
-        int[] arr3 = {2,2,3,1};
-        System.out.println(thirdMax(arr1));
-        System.out.println(thirdMax(arr2));
-        System.out.println(thirdMax(arr3));
+        public static void main(String[] args) {
+            int[] arr1 = {3,2,1};
+            int[] arr2 = {1,2};
+            int[] arr3 = {2,2,3,1};
+            System.out.println(thirdMax(arr1));
+            System.out.println(thirdMax(arr2));
+            System.out.println(thirdMax(arr3));
 
-    }
+        }
 }
+*/

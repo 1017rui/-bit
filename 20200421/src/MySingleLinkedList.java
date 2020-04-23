@@ -123,6 +123,36 @@ public class MySingleLinkedList {
           }
           cur.next=(cur.next).next;
       }
+
+      //找要删除的节点的前驱
+    private Node searchPrev(int key){
+         Node prev=this.head;
+         while(prev.next!=null){
+             if(prev.next.data==key){
+                 return prev;
+             }else{
+                 prev=prev.next;
+             }
+         }
+         return null;
+    }
+      public void remove1 (int key){
+         if(this.head==null){
+             System.out.println("链表为空！");
+             return;
+         }
+         if(this.head.data==key){//要删除头节点
+             this.head=this.head.next;
+             return;
+         }
+         Node prev=searchPrev(key);
+         if(prev==null){
+             System.out.println("没有需要删除的元素！");
+             return;
+         }
+         Node del=prev.next;
+         prev.next=del.next;
+      }
       //封装一个方法，找关键值为key的元素的个数
     private int findCount(int key){
          int count=0;
@@ -136,7 +166,7 @@ public class MySingleLinkedList {
          return count;
     }
      //删除所有值为key的节点  
-     public void removeAllKey(int key){
+     public void removeAllKey(int key){//存在问题，遍历的好多次
          int count=this.findCount(key);
          if(count==0){
              System.out.println("没有需要删除的节点！");
@@ -145,6 +175,24 @@ public class MySingleLinkedList {
              this.remove(key);
              count--;
          }
+     }
+     public void removeAllKey1(int key){//遍历单链表一遍
+         Node prev=this.head;//前驱节点
+         Node cur=prev.next;//代表要删除的节点
+         while(cur!=null){
+             if(cur.data==key){//则是要删除的元素
+                 prev.next=cur.next;
+                 cur=cur.next;
+             }else{//否则prev,cur往后移动
+                 prev=cur;
+                 cur=cur.next;
+             }
+         }
+         //如果头节点满足条件，删除头节点
+         if(this.head.data==key){
+             this.head=this.head.next;
+         }
+
      }
      //得到单链表的长度    
      public int size(){
@@ -166,10 +214,72 @@ public class MySingleLinkedList {
              System.out.println();
          }
      //将单链表清空
-     public void clear(){
-         this.head=null;
+    //释放内存空间
+    //JVM在回收内存的时候，当没有人在引用她的时候，这个对象才会被回收
+     public void clear(){//用于解决内存泄漏
+         this.head=null;//可以回收掉内存
      }
-
+    public Node reverseList() {//反转链表
+       Node cur=this.head;
+       Node prev=null;
+       Node newHead =null;
+       while(cur!=null){
+           Node curNext=cur.next;
+           if(curNext==null){
+              newHead=cur;
+           }
+           cur.next=prev;
+           prev=cur;
+           cur=curNext;
+       }
+     return newHead;
+    }
+public void display1(Node newHead){
+    Node cur=newHead;
+    while(cur!=null){
+        System.out.print(cur.data+" ");
+        cur=cur.next;
+    }
+    System.out.println();
 }
+
+//给定一个带有头结点 head 的非空单链表，返回链表的中间结点。如果有两个中间结点，则返回第二个中间结点
+    public Node middleNode()
+    {
+       /* if(this.head==null){
+            return null;
+        }*/
+        Node slow=this.head;
+        Node fast=this.head;
+
+        while(fast!=null&&fast.next!=null){
+            fast=(fast.next).next;//一次走两步
+            slow=slow.next;//一次走一步
+        }
+        return slow;
+    }
+    //链表中倒数第k个节点
+    public Node FindKthToTail(int k) {
+//首先判断K的合法性
+        if(k<=0||k>this.size()){
+            System.out.println("下标不合法！");
+           return null;
+        }
+// 之后定义两个指针，快指针先走k-1步，之后快慢指针同时移动
+// 当快指针的next为空时，此时慢指针即为所求节点
+        Node fast=this.head;
+        Node slow=this.head;
+        int i=0;
+        while(i<k-1){
+            fast=fast.next;
+            i++;
+        }
+        while(fast.next!=null){
+            slow=slow.next;
+            fast=fast.next;
+        }
+        return slow;
+    }
+    }
 
 
