@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * @author 张瑞瑞
  * @date 2020/05/10 21:40
@@ -36,7 +38,20 @@ public class MyArrayList <T>{
     public T getVal(int pos){
         return this.elem[pos];
     }
-    public static void main(String[] args) {
 
+    @Override
+    public String toString() {
+        return "MyArrayList{" +
+                "elem=" + Arrays.toString(elem) +
+                ", usedSize=" + usedSize +
+                '}';
+    }
+
+    public static void main(String[] args) {
+    MyArrayList <String> myArrayList =new MyArrayList<>() ;
+        myArrayList .add("i");
+        myArrayList .add("love") ;
+        myArrayList .add("you");
+        System.out.println(myArrayList );
     }
 }

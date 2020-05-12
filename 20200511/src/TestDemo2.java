@@ -38,6 +38,8 @@ public class TestDemo2 {
         retList .set(1,"ruirui");
         System.out.println(retList );//[hello, ruirui]
         System.out.println(list);//[hello, ruirui, hahaha, hello]
+        list.clear() ;//清空线性表
+        System.out.println(list);
     }
     /*public static void main1(String[] args) {
         String str="dilireba";
