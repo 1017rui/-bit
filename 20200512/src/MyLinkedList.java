@@ -98,16 +98,34 @@ public class MyLinkedList {
             this.head=this.head.next;
             return;
         }
+
    //需要找到key对应节点的前驱
        Node cur= this.findPrevNode(key) ;
         if(cur==null){
             System.out.println("该链表中没有你要删除的节点！");
             return;
         }
-        
+        Node node=cur.next;//要删除的节点
+        cur.next=node.next;
     }
-    //删除所有值为key的节点
+    //删除所有值为key的节点  只能遍历单链表一次
     public void removeAll(int key){
+        Node prev=this.head;
+        Node cur=this .head.next;
+        while(cur!=null){
+            Node curNext=cur.next;
+            if(cur.data==key){
+                prev.next=cur.next;
+                cur=curNext ;
+            }else{
+                prev=cur;
+                cur=curNext ;
+
+            }
+        }
+        if(this.head.data==key){//如果头节点是要删除的节点
+            this.head=this.head.next;
+        }
 
     }
     //求单链表的长度
@@ -133,6 +151,29 @@ public class MyLinkedList {
         }
         System.out.println();
     }
-
+//反转单链表
+    public Node reverseList(){
+        Node cur=this.head;//指当前要反转的节点
+        Node prev=null;//要删除节点的前驱
+        Node newHead=null;//反转后的头节点
+        while(cur!=null){
+            Node curNext=cur.next;//只想要反转的下一个节点
+            if(curNext ==null){
+                newHead =cur;
+            }
+            cur.next=prev;
+            prev=cur;
+            cur=curNext ;
+        }
+        return newHead;
+    }
+    public void display1(Node newHead){
+        Node cur=newHead ;
+        while(cur!=null){
+            System.out.print(cur.data+" ");
+            cur=cur.next;
+        }
+        System.out.println();
+    }
 
 }
