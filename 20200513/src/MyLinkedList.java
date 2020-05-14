@@ -50,11 +50,7 @@ public class MyLinkedList {
             return -1;
         }
         //找到这个下标对应的节点
-      Node cur=this.head;
-        while(index!=0){
-            cur=cur.next;
-            index--;
-        }
+      Node cur=this.findIndexNode(index) ;
         return cur.val;
     }
 //addAtHead(val)：在链表的第一个元素之前添加一个值为 val 的节点。插入后，新节点将成为链表的第一个节点。  头插法
@@ -98,21 +94,19 @@ public class MyLinkedList {
         }
         if(index==this.size()){
             this.addAtTail(val) ;
+            return;
         }
         if(index<=0){
             this.addAtHead(val) ;
+            return;
         }
         //找到这个下标对应的节点
-        Node cur=this.head;
-        while(index!=0){
-            cur=cur.next;
-            index--;
-        }
+        Node cur=this.findIndexNode(index) ;
         Node node =new Node(val);//要插入的节点
-        node.next=cur.next;
-        node.prev=cur.next.prev;
-        cur.next.prev=node;
-        cur.next=node;
+        node.next=cur;
+        node.prev=cur.prev;
+        cur.prev.next=node;
+        cur.prev=node;
     }
 //deleteAtIndex(index)：如果索引 index 有效，则删除链表中的第 index 个节点。
     /** Delete the index-th node in the linked list, if the index is valid. */
@@ -129,11 +123,7 @@ public class MyLinkedList {
         }
 
         //找到这个下标对应的节点
-        Node cur=this.head;
-        while(index!=0){
-            cur=cur.next;
-            index--;
-        }
+        Node cur=this.findIndexNode(index) ;
         if(index==this.size()-1){
             //如果要删除的是尾节点
             cur.prev.next=null;
@@ -142,5 +132,14 @@ public class MyLinkedList {
         cur.prev.next=cur.next;
         cur.next.prev=cur.prev;
     }
+    public void display(){
+        Node cur=this.head;
+        while(cur!=null){
+            System.out.print(cur.val+" ");
+            cur=cur.next;
+        }
+        System.out.println();
+    }
+
 }
 

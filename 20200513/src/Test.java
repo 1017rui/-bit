@@ -104,7 +104,26 @@ public int findJudge(int N, int[][] trust) {
 
 
 }
+
     public static void main(String[] args) {
+        MyLinkedList my=new MyLinkedList() ;
+        /*my.addAtHead(12);
+        my.addAtHead(13);
+        my.addAtHead(14);
+        my.addAtHead(15);
+        my.addAtHead(16);*/
+        my.addAtTail(23) ;
+        my.addAtTail(24) ;
+        my.addAtTail(25) ;
+        my.addAtTail(26) ;
+        my.addAtTail(27) ;
+        my.addAtIndex(1,111);
+        my.deleteAtIndex(1) ;
+        System.out.println(my.get(4));
+        my.display() ;
+
+    }
+    public static void main2(String[] args) {
        int N=4;
        int[][] trust=new int[3][2];
     }
