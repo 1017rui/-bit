@@ -44,12 +44,35 @@ public class Test {
         while (!queue.isEmpty()) {
             Employee e = queue.poll();
             result += e.importance;
+            //直系下属的重要度
             for (int subId: e.subordinates) {
                 queue.offer(map.get(subId));
             }
         }
         return result;
 
+
+    }
+
+    public static void main(String[] args) {
+
+        List<Employee> list=new ArrayList<>() ;
+        List<Integer> list1=new ArrayList<>() ;
+        List<Integer> list2=new ArrayList<>() ;
+        List<Integer> list3=new ArrayList<>() ;
+        list1.add(2);
+        list1 .add(3);
+
+        Employee employee1=new Employee(1,15,list1) ;
+        Employee employee2=new Employee(2,10,list2) ;
+        Employee employee3=new Employee(3,5,list3) ;
+
+        list.add(employee1 );
+        list.add(employee2 );
+        list.add(employee3 );
+        System.out.println(list);
+
+        System.out.println(getImportance(list, 1));
 
     }
 //在一个小镇里，按从 1 到 N 标记了 N 个人。传言称，这些人中有一个是小镇上的秘密法官。
@@ -105,7 +128,7 @@ public int findJudge(int N, int[][] trust) {
 
 }
 
-    public static void main(String[] args) {
+    public static void main3(String[] args) {
         MyLinkedList my=new MyLinkedList() ;
         /*my.addAtHead(12);
         my.addAtHead(13);

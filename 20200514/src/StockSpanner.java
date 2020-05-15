@@ -1,10 +1,10 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author 张瑞瑞
  * @date 2020/05/14 21:53
  */
+/*
 class gupiao{
     int price;
     int count;
@@ -59,4 +59,26 @@ public class StockSpanner {
 
 
     }
+}
+*/
+public class StockSpanner{
+    public  StockSpanner(){
+
+    }
+    Stack<Integer> stack=new Stack<>();
+    Map<Integer,Integer> map=new HashMap<>() ;//存放股票的价格和股票跨度的键值对
+    public int next(int price){
+        int count=1;
+        int tmp=0;
+        while(!stack .empty() &&stack .peek()<=price){
+          tmp=map.get(stack .peek());
+          count+=tmp;
+          stack.pop();
+        }
+        stack.push(price) ;
+        map.put(price,count);
+        return count;
+
+    }
+
 }
