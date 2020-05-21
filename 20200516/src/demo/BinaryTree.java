@@ -1,6 +1,8 @@
 package demo;
 
 
+
+
 import java.util.*;
 
 /**
@@ -120,13 +122,15 @@ public class BinaryTree {
             return root;
         }
         //2.左边   递归-》当左边全部递归完成之后 判断返回值是否为空
-
-       if(find(root.left,val)!=null){
-           return find(root.left,val);
+        Node left=find(root.left,val);
+       if(left!=null){//不为空说明找到了，即刻返回。
+           return left;
        }
-        //3.右边
-        if(find(root.right,val)!=null){
-            return find(root.right,val);
+
+        //3.否则去右边找
+        Node right=find(root.right,val);
+        if(right!=null){//不为空说明找到了，即刻返回。
+            return right ;
         }
         return null;
     }
@@ -181,89 +185,184 @@ public class BinaryTree {
         return leftHeight >  rightHeight? leftHeight+1 :
                     rightHeight+1;
         }
-        //层序遍历
+       //层序遍历
     public void levelOrderTraversal(Node root){
         if(root==null){
             return ;
         }
-        Queue<Node> queue=new LinkedList<>();
-        queue .offer(root);
-       while(!queue.isEmpty() ) {
-           Node cur = queue.poll();
-           System.out.print(cur.val + " ");
-           if(cur.left!=null) {
-               queue.offer(cur.left);
-           }
-           if(cur.right!=null) {
-               queue.offer(cur.right);
-           }
-       }
+        Queue<Node >queue=new LinkedList<>();
+        queue.offer(root) ;//将根节点入队
+        while(!queue.isEmpty() ){
+            Node cur=queue.poll() ;//弹出队头元素
+            System.out.print(cur.val+" ");//并进行打印
+            if(cur.left!=null){//如果cur左不为空把它入队
+                queue .offer(cur.left ) ;
+            }
+            if(cur.right!=null){//如果cur右不为空把它入队
+                queue.offer(cur.right) ;
+            }
+        }
+        //一旦队列为空说明二叉树已经层序遍历完了。
         System.out.println();
     }
-    public List<List<Character >> levelOrder(Node root) {
-        List<List<Character >> ret = new LinkedList<>();
-        if(root == null) return ret;
-        Queue<Node> queue = new LinkedList<>();
-        queue.offer(root);
-        while (!queue.isEmpty()) {
-            //1、求当前队列的大小  size
-            int size=queue .size();
-            //2、while(size > 0)  -->控制当前每一层的数据个数
-            List <Character > list=new ArrayList<>() ;
+    //层序遍历  放到一个list中
+    public List<List<Character>> levelOrder(Node root) {
+        List<List<Character >> ret=new ArrayList<>() ;
+        if(root==null){
+            return ret;
+        }
+        Queue<Node> queue=new LinkedList<>() ;
+        queue.offer(root) ;
+        while(!queue.isEmpty() ){
+            List<Character > list=new ArrayList<>() ;
+            int size=queue .size() ;
             while(size>0){
-                Node cur = queue.poll();
+                Node cur=queue .poll() ;
                 list.add(cur.val);
-
-                if(cur.left!=null) {
+                if(cur.left!=null){
                     queue.offer(cur.left);
                 }
-                if(cur.right!=null) {
-                    queue.offer(cur.right);
+                if(cur.right!=null){
+                    queue.offer(cur.right) ;
                 }
                 size--;
             }
             ret.add(list);
         }
-
         return ret;
     }
-
     // 判断一棵树是不是完全二叉树
-    public boolean isCompleteTree1(Node root){
-        if(root==null||root.left==null&&root.right==null){
+    public boolean isCompleteTree(Node root){
+        if(root==null){
             return true;
         }
-        if(root.left==null){
-            return false;
+        Queue<Node> queue=new LinkedList<>() ;
+        queue.offer(root);
+        while(!queue.isEmpty() ){
+            Node cur=queue.poll();
+            if(cur!=null){
+                queue.offer(cur.left) ;
+                queue.offer(cur.right);
+            }else{//如果弹出元素为空，立即跳出这个循环。
+                break;
+            }
         }
-        return isCompleteTree1(root.left)&&isCompleteTree1(root.right) ;
+        //判断当前队列里面是否全为空
+        while(!queue.isEmpty() ){
+            Node ret=queue.poll() ;
+            if(ret!=null){
+                return false ;
+            }
+        }
+        return true;
     }
-    // 前序遍历  非递归写法
-    void preOrderTraversal1(Node root){
-
+    // 前序遍历  非递归实现
+    public void preOrderTraversalNor(Node root) {
+        if (root == null) {
+            return ;
+        }
+        Stack<Node> stack=new Stack<>();
+        Node cur=root;
+       while(cur!=null||!stack.isEmpty()){
+           while(cur!=null ){
+               stack.push(cur);
+               System.out.print(cur.val+" ");
+               cur=cur.left;
+           }
+           //cur为空，
+           Node top=stack.pop();
+           cur=top.right;
+       }
+        System.out.println();
     }
-    // 中序遍历  非递归写法
-    void inOrderTraversal1(Node root){
-        if(root==null){
+    // 中序遍历  非递归实现
+    public void inOrderTraversalNor(Node root){
+        if (root == null) {
             return;
         }
-        Stack<Character > stack=new Stack<>();
-       while(root!=null){
-           while(root!=null){
-               stack.push(root.val);
-               root=root.left;
+        Stack<Node> stack=new Stack<>();
+        Node cur=root;
+        while(cur!=null||!stack.isEmpty() ){
+            while(cur!=null){
+                stack.push(cur);
+                cur=cur.left;
+            }
+            Node top=stack.pop();
+            System.out.print(top.val+" ");
+            cur=top.right;
+        }
+        System.out.println();
+
+    }
+    // 后序遍历 非递归实现
+    public void postOrderTraversalNor(Node root){
+        if(root==null){
+            return ;
+        }
+        Stack<Node> stack=new Stack<>();
+        Node cur=root;
+        Node prev=null;
+        while(cur!=null||!stack.isEmpty() ){
+            while(cur!=null){
+                stack.push(cur);
+                cur=cur.left;
+            }
+            cur=stack.peek();
+           if(cur.right==null ||cur.right ==prev ){
+               //此时需要打印cur
+               System.out.print(cur.val+" ");
+               stack.pop();
+               prev=cur;
+               cur=null;
            }
-           char top=stack.pop();
-
-       }
-
+           else{
+               cur=cur .right;
+           }
+        }
+        System.out.println();
+    }
+//OJ上的二叉树创建
+    int i=0;
+    public Node buildTree(String str){
+        Node root=null;
+        if(str.charAt(i)!='#' ){
+            root=new Node(str.charAt(i) );
+            i++;
+            root.left=buildTree(str);
+            root.right=buildTree(str) ;
+        }else{
+            i++;
+        }
+        return root;
+    }
+    //将二叉搜索树转化为有序的顺序节点。
+    public Node prev=null;
+    public void ConvertChild(Node pRootOfTree){
+        if(pRootOfTree ==null){
+            return;
+        }
+        ConvertChild(pRootOfTree .left) ;
+        //System.out.println();
+        pRootOfTree.left=prev;
+        if(prev!=null){
+            prev.right=pRootOfTree ;
+        }
+        prev=pRootOfTree ;
+        ConvertChild(pRootOfTree .right) ;
+    }
+    public Node Convert(Node pRootOfTree) {
+        if(pRootOfTree ==null){
+            return null;
+        }
+        ConvertChild(pRootOfTree );//改变结构
+        Node head=pRootOfTree ;
+        while(head.left!=null){
+            head=head.left;
+        }
+        return head;
 
     }
-    // 后序遍历  非递归写法
-    void postOrderTraversal1(Node root){
-
-    }
-    public Node buildTree(){
+    /*public Node buildTree(){
         Node A=new Node('A');
         Node B=new Node('B');
         Node C=new Node('C');
@@ -282,4 +381,6 @@ public class BinaryTree {
         return A;//返回头节点
 
     }
+    */
+
 }
