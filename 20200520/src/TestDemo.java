@@ -7,7 +7,7 @@ import java.util.List;
 public class TestDemo {
     public static void main(String[] args) {
         BinaryTree binaryTree =new BinaryTree() ;
-        Node ret=binaryTree .buildBinaryTree() ;
+        Node ret=binaryTree .buildBinaryTree();
         System.out.println("==============前序遍历================");
         System.out.println("==============方式一：================");
         binaryTree .preOrderTraversal(ret) ;
@@ -37,7 +37,19 @@ public class TestDemo {
         System.out.println(binaryTree.getLeafSize2(ret));
         System.out.println(binaryTree.getKLevelSize(ret, 3));
         System.out.println(binaryTree.getHeight(ret));
-        Node cur=binaryTree .find(ret,9);
+        Node cur=binaryTree .find(ret,5);
         System.out.println(cur.val);
+        System.out.println("===========层序遍历===========");
+        binaryTree .levelOrderTraversal(ret);
+        System.out.println(binaryTree .isCompleteTree(ret) );
+        List<List<Integer>> list=binaryTree .levelOrder(ret);
+        System.out.println(list);
+        //Node A=new Node(3);
+        //Node B=new Node(7);
+        Node p=ret.left.right;
+        Node q=ret.left.left.left;
+        Node ret1=binaryTree.lowestCommonAncestor(ret, p, q);
+        System.out.println(ret1.val);
+
     }
 }

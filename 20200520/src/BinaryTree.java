@@ -1,5 +1,9 @@
+import sun.security.krb5.internal.CredentialsUtil;
+
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * @author 张瑞瑞
@@ -184,6 +188,148 @@ public class BinaryTree {
         }
         return false;
     }
+    //判断一棵树是否为另一棵树的子树
+//给定两个非空二叉树 s 和 t，检验 s 中是否包含和 t 具有相同结构和节点值的子树。
+    //判断t是否为s的子树
+    public boolean isSubtree(Node s, Node t) {
+        if(s==null||t==null){
+            return false;
+        }
+        //都不为空
+        //如果s和t相等
+        if(isSameTree(s,t) ){
+            return true;
+        }
+        //判断t是否为s的左树的子树,右树的子树
+        return isSubtree(s.left,t) || isSubtree(s.right,t);
+    }
+    //判断一棵树是否为二叉平衡树
+    //一棵高度平衡二叉树定义为：一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过1。
+    public boolean isBalanced(Node root) {
+        if(root==null){
+            return true;
+        }
+        //如果同时满足以下三点，即为平衡二叉树：
+        //1.根节点的左右子树的高度差的绝对值不超过1
+        //2.它的左树也是平衡二叉树
+        //3.它的右树也为平衡二叉树
+        int left=isBalancedChild(root.left);
+        int right=isBalancedChild(root.right) ;
+        return (Math.abs(left-right ) <=1)&&isBalanced(root.left)&&isBalanced(root.right) ;
+
+    }
+    // 获取二叉树的高度  左树和右树之间最高的+1
+    public int isBalancedChild(Node root){
+        if(root==null){
+            return 0;
+        }
+        int leftHeight=isBalancedChild(root.left) ;
+        int rightHeight=isBalancedChild(root.right) ;
+        return (leftHeight >rightHeight) ?(leftHeight +1):(rightHeight +1);
+    }
+    //判断一棵树是否为对称二叉树  镜像对称
+    public boolean isSymmetric(Node root) {
+        if(root==null){
+            return true;
+        }
+           return isSymmetricChild(root.left,root.right);
+    }
+    public boolean isSymmetricChild(Node p,Node q){
+        if(p==null&&q==null){
+            return true;
+        }
+        if(p==null || q==null){
+            return false;
+        }
+        return (p.val==q.val)&&isSymmetricChild(p.left,q.right)&& isSymmetricChild(p.right,q.left);
+
+    }
+    // 层序遍历
+    public void levelOrderTraversal(Node root){
+        if(root==null){
+            return;
+        }
+        Queue<Node> queue=new LinkedList<>();
+        queue.offer(root);//让根节点入队
+        while(!queue .isEmpty() ){
+            Node cur=queue .poll();
+            System.out.print(cur.val+" ");
+            if(cur.left!=null){
+                queue.offer(cur.left);
+            }
+            if(cur.right!=null){
+                queue.offer(cur.right);
+            }
+        }
+        System.out.println();
+    }
+    //层序遍历 OJ上实现
+    public List<List<Integer>> levelOrder(Node root) {
+        List<List<Integer>> ret=new ArrayList<>() ;
+        if(root==null){
+            return ret;
+        }
+        Queue<Node> queue=new LinkedList<>();
+        queue.offer(root);//让根节点入队
+        while(!queue .isEmpty() ){
+            int size=queue .size() ;
+            List<Integer> list=new ArrayList<>();
+            while(size!=0){
+                Node cur=queue .poll();
+                list.add(cur.val);
+                if(cur.left!=null){
+                    queue.offer(cur.left);
+                }
+                if(cur.right!=null){
+                    queue.offer(cur.right);
+                }
+                size--;
+            }
+            ret.add(list);
+        }
+        return ret;
+    }
+    // 判断一棵树是不是完全二叉树
+    public boolean isCompleteTree(Node root){
+        if(root==null){
+            return true;
+        }
+        Queue<Node> queue=new LinkedList<>();
+        queue.offer(root);//让根节点入队
+        while(!queue .isEmpty() ){
+            Node cur=queue .poll();
+            if(cur!=null) {
+                queue.offer(cur.left);
+                queue.offer(cur.right);
+            }else{
+                break;
+            }
+        }
+        while(!queue.isEmpty() ){
+            Node ret=queue.poll();
+            if(ret!=null){
+                return false ;
+            }
+        }
+        return true;
+    }
+    //根据先序字符串建立一个二叉树
+    public int i=0;
+    public Node buildBinaryTreeNew(String str){
+        if(str==null){
+            return null;
+        }
+        Node tree=null;
+        if(str.charAt(i)!='#' ){
+            tree=new Node(str.charAt(i));
+            i++;
+            tree.left=buildBinaryTreeNew(str);
+            tree.right =buildBinaryTreeNew(str) ;
+        }else{
+           i++;
+        }
+        return tree;
+    }
     //首先手动创建一棵二叉树
     public Node buildBinaryTree(){
         Node A=new Node(1);
@@ -202,5 +348,53 @@ public class BinaryTree {
         C.right=G;
         D.left=H;
         return A;
+    }
+    //找出两个节点的最近公共祖先
+    public Node lowestCommonAncestor(Node root, Node p, Node q) {
+        if(root==null){
+            return null;
+        }
+        if(p==root||q==root){
+            return root;
+        }
+        Node left=lowestCommonAncestor(root.left,p,q);
+        Node right=lowestCommonAncestor(root.right,p,q);
+        if(left!=null&&right!=null){
+            return root;
+        }else if(left!=null){
+            return left;
+        }else if(right!=null){
+            return right;
+        }
+        return null;
+    }
+    //输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的双向链表。
+    //二叉搜索树 左子树《根《右子树的节点值
+    //进行中序遍历  可以有序  使用left作为双向链表的前驱，使用right作为双向链表的后继
+    public Node Convert(Node pRootOfTree) {
+        if(pRootOfTree ==null){
+            return null;
+        }
+        ConvertChild(pRootOfTree );
+        while(pRootOfTree .left!=null){
+            pRootOfTree =pRootOfTree .left;
+        }
+        return pRootOfTree ;
+
+    }
+    //用以改变二叉树的结构
+    public Node prev=null;
+    public void ConvertChild(Node pRootOfTree) {
+        if(pRootOfTree ==null){
+            return ;
+        }
+
+        ConvertChild(pRootOfTree .left);
+        pRootOfTree .left=prev;
+        if(prev!=null){
+            prev.right=pRootOfTree ;
+        }
+        prev=pRootOfTree ;
+        ConvertChild(pRootOfTree .right );
     }
 }
