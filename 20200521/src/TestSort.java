@@ -145,6 +145,7 @@ public class TestSort {
             }
         }
     }
+    //优化后
     public static void bubbleSort1(int[] array){
         //每趟确定一个位置
         boolean flag=false;

@@ -397,4 +397,99 @@ public class BinaryTree {
         prev=pRootOfTree ;
         ConvertChild(pRootOfTree .right );
     }
+    //使用前序遍历结果和中序遍历结果创建一个二叉树
+    public int preIndex=0;
+    public Node bulidTreeChild(int[]preorder,int[]inorder,int inBegin,int inEnd){
+        if(inBegin >inEnd ){
+            return null;
+        }
+        Node root=new Node(preorder[preIndex ]);//创建根节点
+        //在中序遍历数组中找到这个节点的下标
+        int rootIndex=findIndex(inorder,inBegin,inEnd,preorder[preIndex ]);
+        preIndex ++;
+        if(rootIndex ==-1){
+            return null;
+        }
+        //创建该节点的左右子树
+        root.left=bulidTreeChild(preorder, inorder, inBegin, rootIndex-1 ) ;
+        root.right=bulidTreeChild(preorder, inorder, rootIndex +1, inEnd  ) ;
+        return root;
+
+    }
+    public static int findIndex(int[]inorder,int inBegin,int inEnd,int val){
+        for(int i=inBegin ;i<=inEnd ;i++){
+            if(inorder [i]==val){
+                return i;
+            }
+        }
+        return -1;//没找到
+    }
+    public Node bulidTree(int[]preorder,int[]inorder){
+        if(preorder==null||inorder==null){
+            return null;
+        }
+        if(preorder.length<=0||inorder.length<=0){
+            return null;
+        }
+        return bulidTreeChild(preorder ,inorder,0,inorder.length-1);
+    }
+//根据中序遍历与后序遍历构建一颗二叉树
+public int postIndex =0;
+public Node buildTreeChild1(int[]inorder,int[]postorder,int inBegin,int inEnd){
+    if(inBegin >inEnd ){
+        return null;
+    }
+    Node root=new Node(postorder [postIndex]);//创建根节点
+    //在中序遍历数组中找到这个节点的下标
+    int rootIndex=findIndex(inorder,inBegin,inEnd,postorder[preIndex ]);
+    postIndex --;
+    if(rootIndex ==-1){
+        return null;
+    }
+    root.right=buildTreeChild1(inorder, postorder, rootIndex +1, inEnd ) ;
+    root.left=buildTreeChild1(inorder, postorder, inBegin, rootIndex -1) ;
+
+    return root;
+}
+public Node buildTree1(int[]inorder,int[]postorder){
+    if(inorder==null||postorder==null){
+        return null;
+    }
+    if(inorder.length<=0||postorder.length<=0){
+        return null;
+    }
+    postIndex=postorder.length-1;
+    return buildTreeChild1(inorder ,postorder,0,inorder.length-1);
+    }
+
+    //根据二叉树创建字符串
+    public void tree2strChild (Node t,StringBuffer sb){
+    if(t==null){
+        return;
+    }
+    sb.append(t.val) ;
+    if(t.left==null){
+        if(t.right ==null){
+            return ;
+        }else{
+           sb.append("()") ;
+        }
+    }else{
+        sb.append("(") ;
+        tree2strChild(t.left,sb) ;//每次创建完了之后拼接一个）
+        sb.append(")") ;
+    }
+    if(t.right==null){
+        return;
+    }else{
+        sb.append("(");
+        tree2strChild(t.right,sb);
+        sb.append(")");
+    }
+    }
+    public String tree2str(Node t) {
+    StringBuffer sb=new StringBuffer() ;
+    tree2strChild(t,sb);
+    return sb.toString() ;
+    }
 }

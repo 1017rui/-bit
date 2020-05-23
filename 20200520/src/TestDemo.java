@@ -7,7 +7,10 @@ import java.util.List;
 public class TestDemo {
     public static void main(String[] args) {
         BinaryTree binaryTree =new BinaryTree() ;
-        Node ret=binaryTree .buildBinaryTree();
+       Node ret=binaryTree .buildBinaryTree();
+        //int[]inorder = {9,3,15,20,7};
+        //int[]postorder = {9,15,7,20,3};
+        //Node ret=binaryTree .buildTree1(inorder ,postorder );
         System.out.println("==============前序遍历================");
         System.out.println("==============方式一：================");
         binaryTree .preOrderTraversal(ret) ;
@@ -50,6 +53,8 @@ public class TestDemo {
         Node q=ret.left.left.left;
         Node ret1=binaryTree.lowestCommonAncestor(ret, p, q);
         System.out.println(ret1.val);
+        String str=binaryTree .tree2str(ret) ;
+     System.out.println(str);
 
     }
 }
