@@ -18,7 +18,7 @@ public class BinarySearchTree {
     public boolean insert(int val) {
         Node node = new Node(val);
         if (root == null) {
-            root = node;
+            root = node;//让根节点指向node
             return true;
         }
         Node cur = root;
@@ -46,7 +46,7 @@ public class BinarySearchTree {
         if(root==null){
             return;
         }
-        System.out.println(root.val+" ");
+        System.out.print(root.val+" ");
         preOrder(root.left) ;
         preOrder(root.right) ;
 
@@ -56,7 +56,7 @@ public class BinarySearchTree {
             return;
         }
         inOrder(root.left) ;
-        System.out.println(root.val+" ");
+        System.out.print(root.val+" ");
         inOrder(root.right) ;
 
     }
@@ -91,8 +91,8 @@ public class BinarySearchTree {
         }
         return true;
     }
+    //删除节点
     public void removeNode (Node parent,Node cur){
-
     if(cur.left==null){
         if(cur==root){
             root=cur.right;
@@ -110,7 +110,20 @@ public class BinarySearchTree {
             parent .right=cur.left ;
         }
     }else{
-
+        //cur的左右节点都不为空
+       Node targetParent=cur;
+       Node target=cur.right;
+       while(target.left !=null){
+           targetParent =target ;
+           target =target .left;
+       }
+       //此时target是要找的替罪羊。
+        cur.val=target .val;
+       if(target ==targetParent .left) {
+           targetParent.left = target.right;
+       }else {//target是targetParent的右树
+           targetParent.right = target.right;
+       }
     }
     }
 }
