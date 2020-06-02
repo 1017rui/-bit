@@ -1,7 +1,4 @@
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author 张瑞瑞
@@ -101,12 +98,97 @@ public class Test {
         }
         return ret;
     }
-    public String mostCommonWord(String paragraph, String[] banned) {
 
-        return null;
+
+    public String mostCommonWord(String paragraph,String[] banned){
+        paragraph +=".";
+        HashSet<String> set=new HashSet<>();//存放禁用单词
+        for(String ban:banned){
+            set.add(ban.toLowerCase()) ;//忽略大小写，全部转化为小写来看待。
+        }
+
+        HashMap<String,Integer> map=new HashMap<>() ;
+        //key 存放段落中出现的单词
+        //value 存放该单词出现的次数
+        int max=0;
+        String result="";
+        StringBuffer stringBuffer =new StringBuffer() ;
+        for(int i=0;i<paragraph .length();i++){
+            char c=paragraph .charAt(i);
+            if((c>='a'&&c<='z')||(c>='A'&&c<='Z')){
+                stringBuffer .append(c) ;
+                continue;
+            }
+
+            if(stringBuffer .length()>0 ){
+                String res=stringBuffer .toString() .toLowerCase() ;
+                if(!set.contains(res) ){
+                    map.put(res,map.getOrDefault(res,0)+1 );
+                    int count=map.get(res);
+                    if(count>max){
+                        max=count;
+                        result =res;
+                    }
+                }
+                stringBuffer =new StringBuffer() ;
+            }
+        }
+        return result;
 
     }
+    public static  int[] numSmallerByFrequency(String[] queries, String[] words) {
+       int count=0;
+       List<Integer> list=new ArrayList<>() ;
+
+        for(int i=0;i<queries .length ;i++){
+             count=0;
+            for(int j=0;j<words .length;j++){
+                if(f(queries[i])<f(words[j])){
+                    count++;
+                }
+            }
+            list.add(count) ;
+        }
+       int[] array=new int[list.size() ] ;
+        int i=0;
+        for(Integer in: list){
+            array[i++]=in;
+        }
+    return array;
+    }
+    public static  int f(String str){
+        int min=123;
+        if(str.length() ==1){
+            return 1;
+        }
+        for(int i=0;i<str.length()-1;i++){
+            if(str.charAt(i)<=str.charAt(i+1)){
+                min=Math.min(min,str.charAt(i)) ;
+            }else{
+                min=Math.min(min,str.charAt(i+1)) ;
+            }
+        }
+        char ch=(char) min;
+        int count=0;
+        for(int i=0;i<str.length();i++){
+            if(str.charAt(i)==min ){
+                count++;
+            }
+        }
+        return count;
+
+    }
+
     public static void main(String[] args) {
+        String str="b";
+        int count=f(str);
+        System.out.println(count);
+        String [] strings1={"bba","abaaaaaa","aaaaaa","bbabbabaab","aba","aa","baab","bbbbbb","aab","bbabbaabb"};
+        String[] strings2={"aaabbb","aab","babbab","babbbb","b","bbbbbbbbab","a","bbbbbbbbbb","baaabbaab","aa"};
+       int[] array=numSmallerByFrequency(strings1,strings2) ;
+        System.out.println(Arrays.toString(array) );
+    }
+    public static void main2(String[] args) {
         int[]nums={3,1};
         boolean ret=containsDuplicate(nums) ;
         System.out.println(ret);
