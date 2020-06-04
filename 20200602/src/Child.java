@@ -1,5 +1,4 @@
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author 张瑞瑞
@@ -20,7 +19,15 @@ public class Child  extends Base {
 
 
     public static void main(String[] args) {
-      new Child("C");
+        HashMap<String,Integer> map=new HashMap<>();
+
+
+            Scanner scan=new Scanner(System.in);
+            while(scan.hasNext()){
+                String str=scan.nextLine();
+            }
+        }
+
     }
 
-}
+

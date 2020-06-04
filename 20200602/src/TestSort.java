@@ -86,10 +86,10 @@ public class TestSort {
         }
     }
     /*
-    *快速排序：
+    *快速排序：比堆排快但空间复杂度比堆排略高。
     * 将待排序序列化分成两部分
     * 时间复杂度：O(n*logn)（最好情况） O(n^2) （最坏情况）
-    * 空间复杂度：最好情况:O(log2n) 最坏情况:O（n）
+    * 空间复杂度：最好情况:O(logn) 最坏情况:O（n）
     * 稳定性：不稳定
      */
     public static int partition (int[] array,int left,int right){
