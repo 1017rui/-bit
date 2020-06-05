@@ -1,0 +1,1 @@
+@java -cp "D:\-bit\2020-0605-MySQL-表设计-JDBC\out\production\2020-0605-MySQL-表设计-JDBC" com.peixinchen.MySQLClient %*

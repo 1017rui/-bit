@@ -80,17 +80,54 @@ create table user_like_article_relation (
   user_id int not null comment '点赞用户 id',
   article_id int not null comment '点赞哪篇文章的 id',
 );
---注册
-insert table users(username,nickname,password) values (?,?,?);
---登录
+--动作，某个用户发表文章
+insert into articles(author_id,title,published_at,content) values(?,?,?,?);
+--动作，注册
+insert into users(username,nickname,password) values (?,?,?);
+--动作，登录
 select id,username,nickname from users where username=?and password=?;
---点赞
-insert table user_like_article_relation(user_id,article_id)values (?,?);
--- 评论
-insert table comments(user_id,article_id,published_at,content) values(?,?,?,?);
---用户取消点赞
+--动作，点赞
+insert into user_like_article_relation(user_id,article_id)values (?,?);
+-- 动作，评论
+insert into comments(user_id,article_id,published_at,content) values(?,?,?,?);
+--动作，用户取消点赞
 delete from user_like_article_relation where user_id=? and article_id=?;
---展示所有文章的标题列表
+--动作，展示所有文章的标题列表，最先发表的文章再最前面。
 select title from articles order by published_at desc;
 
 
+
+
+update exam_result set english=60 where english<60;
+update exam_result set english=english+5 where english>=60;
+update student set name='孙猴子',sn='10101' where name='孙悟空';
+delete  from student where id='103';
+deldete from student;
+--老师表
+create table teacher(
+id int primary key auto_increment comment '自增用户 id',
+name varchar(50) not null comment '老师姓名',
+age int is not null comment '老师年龄',
+height double comment '老师身高',
+weight double comment '老师体重',
+sex char(1) not null default '女' comment '老师性别',
+education varchar(50) not null default '大学本科' comment '老师学历',
+birthday date  comment '老师生日',
+teacher_id varchar(18) not null unique comment '身份证号'
+);
+--商品表
+create table goods(
+id int primary key auto_increment comment '自增用户 id',
+name varchar(50) not null unique comment '商品名称',
+price double not null comment '商品价格',
+stock int comment '商品库存',
+depict varchar(200) not null comment '商品描述'
+); 
+--图书表
+create table books(
+id int primary key auto_increment comment '自增用户 id',
+name varchar(100) not null unique comment '图书名',
+author varchar(50) not null comment '图书作者',
+price double not null comment '图书价格',
+classification varchar(50) not null unique comment '图书分类'
+);
