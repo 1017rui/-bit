@@ -1,30 +1,88 @@
 package com.peixinchen;
 
+
+import java.sql.*;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class MySQLClient {
     /**
      * 以下配置，可以通过 parseArguments 进行替换
      */
-    private static String host = "127.0.0.1";
-    private static int port = 3306;
-    private static String user = null;
-    private static String password = "";
-    private static String defaultDatabaseName = "";
+    private static String host = "127.0.0.1";//主机
+    private static int port = 3306;//端口
+    private static String user = null;//用户
+    private static String password = "0210";//密码
+    private static String defaultDatabaseName = "";//默认数据库名
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException {
         System.out.println(Arrays.toString(args));
         // args 代表的就是用户输入的参数
         if (args.length == 0) {
-            printUsageAndExit();
+            printUsageAndExit();//打印使用说明，直接退出就行
         }
-
+        //将参数传进去进行解析
         parseArguments(args);
+        //1.进行数据库的连接
+        Class.forName("com.mysql.jdbc.Driver");
+        String url=String.format("jdbc:mysql://%s:%d/%s?useSSL=false&charsetEncoding=utf8",host,port,defaultDatabaseName );
+        try {
+            Connection connection = DriverManager .getConnection(url,user,password ) ;
+           printWelcome();
+            Scanner scanner=new Scanner(System.in);
+            System.out.println("mysql>");
+            while(true){
+                String cmd=scanner.nextLine() ;
+                if(cmd.equalsIgnoreCase("quit") ){
+                    break;
+                }
+
+                if(cmd.startsWith("select")|| cmd .startsWith("show") ){
+                    executeQuery(connection,cmd);
+                }else{
+                    executeUpdate(connection,cmd);
+                }
+                System.out.println("mysql>");
+            }
+            connection .close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        /*
         System.out.println(host);
         System.out.println(port);
         System.out.println(user);
         System.out.println(password);
-        System.out.println(defaultDatabaseName);
+        System.out.println(defaultDatabaseName);*/
+
+    }
+
+    private static void executeUpdate(Connection connection, String cmd) throws SQLException {
+        //自己写的 存在问题
+        Statement statement=connection .createStatement() ;
+        int affectedRows=statement.executeUpdate(cmd);
+        System.out.printf("Query ok,%d row affected%n",affectedRows );
+        statement .close();
+    }
+
+    private static void executeQuery(Connection connection, String cmd) throws SQLException {
+        Statement statement=connection .createStatement() ;
+        ResultSet resultSet =statement .executeQuery(cmd);
+        int columnCount=resultSet .getMetaData() .getColumnCount() ;
+        while(resultSet .next()){
+            for(int i=0;i<columnCount ;i++){
+                String value=resultSet .getString(i+1) ;
+                System.out.print(value+", ");
+            }
+            System.out.println();
+        }
+        resultSet.close();
+        statement .close();
+    }
+
+    private static void printWelcome() {
+        System.out.println("欢迎使用MySQLClient");
+        System.out.println();
     }
 
     private static void parseArguments(String[] args) {
@@ -57,7 +115,7 @@ public class MySQLClient {
             }
         }
     }
-
+    //相当于打印了一个菜单。
     private static void printUsageAndExit(String... messages) {
         System.out.println("使用帮助: mysql [选项] 默认数据库");
         System.out.println(" --help         打印帮助信息");
@@ -75,6 +133,6 @@ public class MySQLClient {
             System.out.println(s);
         }
 
-        System.exit(1);
+        System.exit(1);//退出
     }
 }
