@@ -20,6 +20,7 @@ import java.util.Set;
         int nums4=scan.nextInt();
     }
 }*/
+/*
 public class Main{
     public static int func(Integer[] arr,int n){
         HashMap<Integer,Integer> map=new HashMap<>();
@@ -38,7 +39,8 @@ public class Main{
         return -1;
     }
 
-    /*public static void main(String[] args) {
+    */
+/*public static void main(String[] args) {
         Scanner scan=new Scanner(System.in);
         int[]array=new int[100];
         int i=0;
@@ -47,7 +49,8 @@ public class Main{
         }
         int ret=func(array,i);
         System.out.println(ret);
-    }*/
+    }*//*
+
     public static void main(String[]args){
         Scanner scan=new Scanner(System.in);
         while(scan.hasNext()){
@@ -60,5 +63,35 @@ public class Main{
             int ret=func(array,array.length);
             System.out.println(ret);
         }
+    }
+}*/
+import java.util.Scanner;
+
+public class Main{
+    static int[] weight;
+    static int N;
+    static int count=0;
+
+    public static void main(String[]args){
+        Scanner scan=new Scanner(System.in);
+        N=scan.nextInt();
+        weight=new int[N+1];
+        for(int i=1;i<=N;i++){
+            weight[i]=scan.nextInt();
+        }
+        count(40,N);
+        System.out.println(count);
+
+    }
+    public static void count(int s,int n){
+        if(s==0){
+            count++;
+            return;
+        }
+        if(s<0||(s>0&&n<1)){
+            return;
+        }
+        count(s-weight[n],n-1);
+        count(s,n-1);
     }
 }
