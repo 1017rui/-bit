@@ -20,7 +20,7 @@ public class Main {
     //具体的操作
     private static List<Action> actionList =new ArrayList<>() ;
 
-    private static void initFreatureList() {
+    private static void initFeatureList() {
         featureList.add("用户注册");
         featureList.add("用户登录");
         featureList.add("查看文章列表-按照发表时间倒序给出");
@@ -29,20 +29,16 @@ public class Main {
         featureList.add("评论指定文章-要求先登录");
         featureList.add("点赞指定文章-要求先登录");
     }
-    //用户注册的实现类
-    static class UserRegisterAction implements Action {
-
-        @Override
-        public void run() {
-            //注册
-            userRegister() ;
-        }
-    }
     private static void initActionList(){
     actionList .add(new UserRegisterAction() );
+    actionList .add(new UserLoginAction() );
+    actionList .add(new ArticleListAction());
+    actionList .add(new ArticlePublishAction());
+
     }
+
     public static void main(String[] args) {
-        initFreatureList();
+        initFeatureList();
         initActionList() ;
         Scanner scanner=new Scanner(System.in);
         while(true){
@@ -52,6 +48,7 @@ public class Main {
             showPrompt();
             //用户选择
             int select=scanner .nextInt() ;
+            //分发
             doAction(select);
         }
 
@@ -81,10 +78,6 @@ public class Main {
             System.out.printf("  %d. %s%n", i + 1, featureList.get(i));
         }
         System.out.println("  0. 退出");
-    }
-    //用户注册
-    private static void userRegister(){
-        System.out.println("开始用户注册！");
     }
 
 }
