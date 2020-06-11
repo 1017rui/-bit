@@ -18,12 +18,12 @@ public class Main {
     private static List<Action> actionList =new ArrayList<>() ;
 
     private static void initFeatureList() {
+        //已完成
         featureList.add("用户注册");
         featureList.add("用户登录");
         featureList.add("查看文章列表-按照发表时间倒序给出");
         featureList.add("发表文章-要求先登录");
         featureList.add("查看指定文章内容");
-
         featureList.add("评论指定文章-要求先登录");
         featureList.add("点赞指定文章-要求先登录");
         featureList .add("取消点赞指定文章-要求先登录");
@@ -31,19 +31,26 @@ public class Main {
     }
     private static void initActionList(){
 
-    //用户注册
-    actionList .add(new UserRegisterAction() );
-    //用户登录
-    actionList .add(new UserLoginAction() );
-    //查看文章列表
-    actionList .add(new ArticleListAction() );
-    //发表文章
-    actionList .add(new ArticlePublishAction() );
-    //查看指定文章内容
-    actionList .add(new ArticleDetailAction() );
+        //用户注册
+        actionList .add(new UserRegisterAction() );
+        //用户登录
+        actionList .add(new UserLoginAction() );
+        //查看文章列表
+        actionList .add(new ArticleListAction() );
+        //发表文章
+        actionList .add(new ArticlePublishAction() );
+        //查看指定文章内容
+        actionList .add(new ArticleDetailAction() );
+        //评论指定文章
+        actionList .add(new CommentArticleAction() );
+        //点赞指定文章
+        actionList .add(new LikeArticleAction() );
+        //取消点赞指定文章
+        actionList .add(new CancelLikeArticleAction() );
+        //查找标题中包含某些字符的文章列表
+        actionList .add(new ContainCharacterArticleListAction() );
 
     }
-
     public static void main(String[] args) {
 
         //使用该方法初始化功能菜单列表

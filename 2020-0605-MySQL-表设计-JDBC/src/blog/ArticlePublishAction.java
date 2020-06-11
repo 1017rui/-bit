@@ -43,7 +43,7 @@ public class ArticlePublishAction implements Action {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String publishedAtStr = format.format(publishedAt);
 
-        //// 现在信息已经获取完全，通过 jdbc 执行 insert 操作
+        // 现在信息已经获取完全，通过 jdbc 执行 insert 操作
         //获取connection
         try(Connection connection =DBUtil .getConnection() ){
             String sql="insert into articles (author_id,title,published_at,content) values(?,?,?,?)";

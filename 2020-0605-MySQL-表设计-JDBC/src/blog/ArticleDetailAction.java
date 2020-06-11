@@ -10,6 +10,7 @@ import java.util.*;
  * @author 张瑞瑞
  * @date 2020/06/09 16:56
  */
+//查看指定文章内容
 public class ArticleDetailAction implements Action  {
     @Override
     public void run() {
@@ -72,7 +73,9 @@ public class ArticleDetailAction implements Action  {
             //4.根据 用户id查询用户昵称
             //用户id来自（作者id+评论者id）
            Set<String> userIdSet=new HashSet<>() ;
+            //把作者id加进去
             userIdSet .add(authorId );
+            //吧评论者的id加进去
             for(String[] comment: commentList ){
                 userIdSet .add(comment[0]);
             }

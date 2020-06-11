@@ -173,7 +173,97 @@ create table school_students (
     class_id int,
     name varchar(200)
 );
+insert into school_classes (id,name)values
+(1,'三国'),
+(2,'水浒'),
+(3,'西游'),
+(4,'红楼');
+insert into school_students (id,class_id,name) values
+(1,1,'曹操'),
+(2,1,'刘备'),
+(3,1,'孙权'),
+(4,2,'宋江'),
+(5,2,'武松'),
+(6,3,'唐僧'),
+(7,3,'观音'),
+(8,100,'姜子牙'),
+(9,100,'申公豹');
 
 -- 以三国、水浒为例，构造测试数据
 -- 尝试完成 内联、外联（左联和右联）的查询
+select class_id,school_classes.name as scname,school_students.name as ssname from school_classes,school_students where school_classes.id=class_id;
+select class_id,school_classes.name as scname,school_students.name as ssname from school_classes join school_students where school_classes.id=class_id;
+select class_id,school_classes.name as scname,school_students.name as ssname from school_classes left join school_students on school_classes.id=class_id;
+select class_id,school_classes.name as scname,school_students.name as ssname from school_classes right join school_students on school_classes.id=class_id;
+
+--内联
+select 
+c.id cid,
+c.name cname,
+s.id sid,
+s.name sname
+from 
+school_classes as c,
+school_students as s
+where 
+c.id=s.class_id;
+--左联
+select 
+c.id cid,
+c.name cname,
+s.id sid,
+s.name sname
+from 
+school_classes as c  left join
+school_students as s
+on 
+c.id=s.class_id;
+--右联
+select 
+c.id cid,
+c.name cname,
+s.id sid,
+s.name sname
+from 
+school_classes as c  right join
+school_students as s
+on 
+c.id=s.class_id;
+
+--自联
+--自己和自己做联表查询
+create table bit_students(
+id int ,
+name varchar(200),
+master_id int
+);
+
+insert into bit_students(id,name,master_id) values
+(1,'刘备',1),
+(2,'关羽',1),
+(3,'张飞',1),
+(4,'曹操',4),
+(5,'夏侯惇',4),
+(6,'夏侯渊',4),
+(7,'宋江',7),
+(8,'花荣',7),
+(9,'李逵',7);
+
+--查询出每个人的姓名+他上级的姓名。
+
+--将这张表看成两张表
+select 
+bs1.name "成员",bs2.name "长官"
+from 
+bit_students as bs1,bit_students as bs2
+where
+bs1.master_id=bs2.id;
+
+
+select 
+s.id sid ,s.name sname, m.id mid,m.name mname
+from
+bit_students as s,bit_students as m
+where
+s.master_id=m.id;
 
