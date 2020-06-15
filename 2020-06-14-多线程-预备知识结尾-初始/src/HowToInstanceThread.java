@@ -29,7 +29,7 @@ public class HowToInstanceThread {
             //2.new B 类的对象，是一个Runnable,作为任务传递的线程对象
             B b = new B();
             //thread=b; error
-            thread =new Thread() ;
+            thread =new Thread(b) ;
 
             thread.start();
         }
