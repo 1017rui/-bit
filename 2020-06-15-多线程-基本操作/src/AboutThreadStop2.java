@@ -3,10 +3,15 @@ import java.util.Scanner;
 /**
  * @author 张瑞瑞
  * @date 2020/06/15 20:20
+ *
+ *
+ *
  * 如何不使用Thread中的设计方式通知线程停止
  */
 public class AboutThreadStop2 {
 
+    //定义了一个类变量 线程之间可以共享
+    //B线程可以通过观察该变量，知道是否有人让他停止
     private static volatile boolean isInterrupted=false;
     static class B extends Thread{
         B(){
@@ -18,7 +23,7 @@ public class AboutThreadStop2 {
             while (true) {
                  try {
                 System.out.println("挖煤");
-                Thread.sleep(59000);
+                Thread.sleep(3000);
 
                 System.out.println("是否有人让我停止运行："+isInterrupted );
                  } catch (InterruptedException e) {

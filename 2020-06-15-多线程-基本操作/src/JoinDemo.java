@@ -17,7 +17,7 @@ public class JoinDemo {
         B b=new B();
         b.start();
         System.out.println("我不走了，什么时候b停止，我才继续");
-        b.join();
+        b.join();//main线程会放弃cpu,直到B停止 我才停止
         System.out.println("B结束了，我就继续");
     }
 }

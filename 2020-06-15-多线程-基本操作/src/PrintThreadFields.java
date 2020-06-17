@@ -4,6 +4,10 @@
  */
 public class PrintThreadFields {
     static class SubThread extends Thread{
+        SubThread (){
+            super("张瑞瑞");
+        }
+
         //1.定义一个类
         //2.覆写该类的run方法
         @Override
@@ -12,15 +16,16 @@ public class PrintThreadFields {
             try {
                 Thread.sleep(100*1000) ;
             } catch (InterruptedException e) {
-                e.printStackTrace();
+
             }
         }
     }
 
     //哪个线程调用该方法就打印那个线程的属性
     private static void printFields() {
-        Thread t=Thread .currentThread() ;
-        long id=t.getId() ;
+        Thread t=Thread .currentThread() ;//返回当前线程的引用
+        long id=t.getId() ;//线程的id
+        System.out.println("线程的id"+id+":"+t.getId() );
         System.out.println("线程的名字"+id+":"+t.getName() );
         System.out.println("线程的优先级"+id+":"+t.getPriority() );
         System.out.println("线程的状态"+id+":"+t.getState() );
