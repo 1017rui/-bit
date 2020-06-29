@@ -25,17 +25,22 @@ public class Server {
             //2.在循环里头不停的接受请求
             while(true){
                 //2.1等待客户发来请求  被动的等待
+                //每次接受的请求，可以来自完全不同的用户
+                //接受请求->处理请求得到响应->发送响应
                 //会调用一个阻塞的方法，不知道什么时候才能返回。
-                byte[] receiveBuffer=new byte[1024];
+                byte[] receiveBuffer=new byte[1024];//接收时，需要提供一个空的数组，作为接收数据的容器
                 //需要应用的开发人员和用户保证的请求不会超过1024字节
-                // 创建一个 DatagramPacket 对象，并且把 接收缓冲区（receive buffer）关联上去
+
+                // 创建一个 DatagramPacket 对象，并且把 接收缓冲区（receiveBuffer）关联上去
                 DatagramPacket receivePacket=new DatagramPacket(receiveBuffer ,0,receiveBuffer .length) ;
 
                 // 通过 socket 等待客户端发送数据，会把接收数据放入 receivePacket 对象（关联的 receiveBuffer 中）
-                // 会调用一个阻塞的方法，不知道什么时候才能返回
+
                 System.out.printf("%s: DEBUG: 等待客户端发送请求过来 ...%n", new Date());
-                serverSocket.receive(receivePacket);
+                // 会调用一个阻塞的方法，不知道什么时候才能返回
+                serverSocket.receive(receivePacket);//神么时候用户发送请求才会返回
                 System.out.printf("%s: DEBUG: 收到了客户端发送来的请求%n", new Date());
+
                 // 数据接收成功，需要明确
                 // 2.1.1 对方是谁（对方的 ip + port)
                 String host = receivePacket.getAddress().getHostName();
@@ -47,7 +52,7 @@ public class Server {
                 System.out.printf("%s: DEBUG: 接收到 %d 字节的数据%n", new Date(), length);
 
                 // 2.1.3 还有一个任务：目前接收到的数据是字节形式的，我们转换成字符形式，便于理解
-                //涉及到了字符集编码的问题
+                //字节->字符 涉及到了字符集编码的问题
                 //假设双方都是用utf-8的编码（我需要保证的）
                 String request=new String(receiveBuffer ,0,length,"UTF-8");
                 System.out.printf("%s: DEBUG: 收到的请求是: %s%n", new Date(), request);

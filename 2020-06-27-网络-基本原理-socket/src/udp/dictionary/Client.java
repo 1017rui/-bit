@@ -1,4 +1,6 @@
-package udp.echo;
+package udp.dictionary;
+
+import udp.echo.Server;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -7,21 +9,17 @@ import java.net.InetAddress;
 import java.util.Date;
 import java.util.Scanner;
 
-/**
- * @author 张瑞瑞
- * @date 2020/06/28 18:48
- */
-
 public class Client {
-    public static final String SERVER_HOST = "127.0.0.1";//127.0.0.1 专指本机49.233.172.121
+    public static final String SERVER_HOST = "127.0.0.1";
+    //public static final String SERVER_HOST = "49.233.172.121";
 
     public static void main(String[] args) {
         // 从标准输入中读取内容的 scanner
         Scanner stdinScanner = new Scanner(System.in);
 
         // 创建一个 DatagramSocket，创建方式和 Server 的略有不同
-        // 不明确我自己的 port，交给 OS 随意分配一个未被使用的 port 即可
-        // 我们是 Client，我们 地址，端口 不需要公开
+        // 明确明确我自己的 port，交给 OS 随意分配一个未被使用的 port 即可
+        // 我们是 Client，我们 地址 不需要公开
         try (DatagramSocket clientSocket = new DatagramSocket()) {
             System.out.printf("%s: DEBUG: 已经创建好 socket 对象%n", new Date());
             System.out.print("echo> ");
