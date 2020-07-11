@@ -228,6 +228,7 @@ public class Main{
         }
     }
 }*/
+/*
 import java.util.Scanner;
 
 public class Main{
@@ -246,4 +247,75 @@ public class Main{
             System.out.print(String.format("%.3f",r)+" "+String.format("%.3f",v) );
         }
     }
+}*/
+/*
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner scan=new Scanner(System.in);
+            while(scan.hasNext()){
+                String str=scan.nextLine();
+                int[] array=new int[26];
+                for(int i=0;i<str.length();i++){
+                    char ch=str.charAt(i);
+                    if(ch>='A'&&ch<='Z') {
+                        array[ch-'A']++;
+                    }
+                }
+                for(int i=0;i<26;i++){
+                    System.out.println((char)('A'+i)+":"+array[i]);
+                }
+            }
+    }
 }
+*/
+
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner scan=new Scanner(System.in);
+        while(scan.hasNext()){
+            String str=scan.nextLine();
+            String s=str.substring(2);
+            int j=0;
+            int ret=0;
+            int tmp=0;
+            for(int i=s.length()-1;i>=0;i--){
+                char ch=s.charAt(i);
+                if(ch=='A'){
+                   tmp=10;
+                }else if(ch=='B'){
+                    tmp=11;
+                }else if(ch=='C'){
+                    tmp=12;
+                }else if(ch=='D'){
+                    tmp=13;
+                }else if(ch=='E'){
+                    tmp=14;
+                }else if(ch=='F'){
+                    tmp=15;
+                }else{
+                    tmp=(char)ch;
+                }
+                ret+=tmp*Math.pow(16,j++);
+            }
+            System.out.println(ret);
+        }
+    }
+}
+/*
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        while (scan.hasNext()) {
+            String str=scan.nextLine();
+            int ret=Integer.parseInt(str.substring(2), 16);
+            System.out.println(ret);
+
+        }
+    }
+}*/
