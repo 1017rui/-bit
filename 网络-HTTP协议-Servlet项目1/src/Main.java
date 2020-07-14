@@ -271,37 +271,44 @@ public class Main{
 }
 */
 
-import java.util.Scanner;
+import java.util.*;
 
 public class Main{
     public static void main(String[] args){
         Scanner scan=new Scanner(System.in);
+        List<Integer> list=new ArrayList<>();
         while(scan.hasNext()){
-            String str=scan.nextLine();
-            String s=str.substring(2);
-            int j=0;
-            int ret=0;
-            int tmp=0;
-            for(int i=s.length()-1;i>=0;i--){
-                char ch=s.charAt(i);
-                if(ch=='A'){
-                   tmp=10;
-                }else if(ch=='B'){
-                    tmp=11;
-                }else if(ch=='C'){
-                    tmp=12;
-                }else if(ch=='D'){
-                    tmp=13;
-                }else if(ch=='E'){
-                    tmp=14;
-                }else if(ch=='F'){
-                    tmp=15;
-                }else{
-                    tmp=(char)ch;
+            int n=scan.nextInt();
+            int sum=0;
+            for(int i=0;i<n;i++){
+                int a=scan.nextInt();
+                int b=scan.nextInt();
+
+                if(a==1){
+                    //插入
+                    int j=0;
+                    for(;j<list.size();j++){
+                        if(list.get(j)>=b){
+                            list.add(j,b);
+                            break;
+                        }
+                    }
+                    if(list.size()==j){
+                        list.add(b);//尾插
+                    }
+                    sum+=b;
+                }else if(a==2){
+                    //删除
+                    list.remove(list.indexOf(b));
+                    sum-=b;
                 }
-                ret+=tmp*Math.pow(16,j++);
+                int max=list.get(list.size()-1);
+                if(sum-max>max){
+                    System.out.println("Yes");
+                }else{
+                    System.out.println("No");
+                }
             }
-            System.out.println(ret);
         }
     }
 }

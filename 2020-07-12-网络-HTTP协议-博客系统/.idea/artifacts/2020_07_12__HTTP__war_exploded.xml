@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="2020-07-12-网络-HTTP协议-博客系统:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/2020_07_12__HTTP__war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="2020-07-12-网络-HTTP协议-博客系统" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/lib/servlet-api.jar" />
+        </element>
+        <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/web.xml" />
+      </element>
+      <element id="javaee-facet-resources" facet="2020-07-12-网络-HTTP协议-博客系统/web/Web" />
+    </root>
+  </artifact>
+</component>
