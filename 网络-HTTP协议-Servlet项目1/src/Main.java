@@ -271,7 +271,7 @@ public class Main{
 }
 */
 
-import java.util.*;
+/*import java.util.*;
 
 public class Main{
     public static void main(String[] args){
@@ -311,7 +311,7 @@ public class Main{
             }
         }
     }
-}
+}*/
 /*
 import java.util.Scanner;
 
@@ -326,3 +326,53 @@ public class Main {
         }
     }
 }*/
+import java.util.Scanner;
+
+public class Main{
+    //进行加密
+    public static String Add(String str){
+        StringBuffer sb=new StringBuffer();
+        for(char ch:str.toCharArray()){
+            if(ch>='A'&&ch<='Z'){
+                ch=(char)(ch+32);
+                ch=(ch=='z')?'a':(char)(ch+1);
+            }else if(ch>='a'&&ch<='z'){
+                ch=(char)(ch-32);
+                ch=(ch=='Z')?'A':(char)(ch+1);
+            }else{
+                //数字
+                ch=(ch=='9')?'0':(char)(ch+1);
+            }
+            sb.append(ch);
+        }
+        return sb.toString();
+    }
+    //进行解密
+    public static String Sub(String str){
+        StringBuffer sb=new StringBuffer();
+        for(char ch:str.toCharArray()){
+            if(ch>='A'&&ch<='Z'){
+                ch=(char)(ch+32);
+                ch=(ch=='a')?'z':(char)(ch-1);
+            }else if(ch>='a'&&ch<='z'){
+                ch=(char)(ch-32);
+                ch=(ch=='A')?'Z':(char)(ch-1);
+            }else{
+                //数字
+                ch=(ch=='0')?'9':(char)(ch-1);
+            }
+            sb.append(ch);
+        }
+        return sb.toString();
+    }
+    public static void main(String[] args){
+        Scanner scan=new Scanner(System.in);
+        while(scan.hasNext()){
+            String add=scan.nextLine();//需要加密
+            String sub=scan.nextLine();//需要解密
+            System.out.println(Add(add));
+            System.out.println(Sub(sub));
+
+        }
+    }
+}
