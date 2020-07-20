@@ -326,6 +326,7 @@ public class Main {
         }
     }
 }*/
+/*
 import java.util.Scanner;
 
 public class Main{
@@ -373,6 +374,75 @@ public class Main{
             System.out.println(Add(add));
             System.out.println(Sub(sub));
 
+        }
+    }
+}*/
+
+import java.util.*;
+
+public class Main{
+    public static String func(String s){
+        StringBuffer sb=new StringBuffer();
+        for(int i=0;i<s.length();i++){
+            char ch=s.charAt(i);
+            if(ch>='0'&&ch<='9'){
+                sb.append(ch);
+            }else if(ch>='A'&&ch<='C'){
+                sb.append("2");
+            }else if(ch>='D'&&ch<='F'){
+                sb.append("3");
+            }else if(ch>='G'&&ch<='I'){
+                sb.append("4");
+            }else if(ch>='J'&&ch<='L'){
+                sb.append("5");
+            }else if(ch>='M'&&ch<='O'){
+                sb.append("6");
+            }else if(ch>='P'&&ch<='S'){
+                sb.append("7");
+            }else if(ch>='T'&&ch<='V'){
+                sb.append("8");
+            }else if(ch>='W'&&ch<='Z'){
+                sb.append("9");
+            }
+            if(sb.toString().length()==3){
+                sb.append("-");
+            }
+        }
+        return sb.toString();
+    }
+    //去掉字符串中的-
+    public static String newString(String s) {
+        StringBuffer sb=new StringBuffer() ;
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)!='-' ){
+                sb.append(s.charAt(i));
+            }
+        }
+        return sb.toString() ;
+    }
+
+    public static void main(String[] args){
+        Scanner scan=new Scanner(System.in);
+        while(scan.hasNext()){
+            int n=scan.nextInt();
+            String[] strings=new String[n];
+            Set<String> set=new HashSet<>();
+            for(int i=0;i<n;i++){
+                strings[i]=scan.next();
+                String str=newString(strings[i]);
+                String ret=func(str);
+                set.add(ret);
+            }
+            String[] tmp=new String[set.size()];
+            int j=0;
+            for(String s:set){
+                tmp[j++]=s;
+            }
+            Arrays.sort(tmp);
+            for(int i=0;i<tmp.length;i++){
+                System.out.println(tmp[i]);
+            }
+            System.out.println();
         }
     }
 }
