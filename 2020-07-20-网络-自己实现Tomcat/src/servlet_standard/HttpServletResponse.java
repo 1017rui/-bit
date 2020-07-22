@@ -1,6 +1,7 @@
 package servlet_standard;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 
 public interface HttpServletResponse extends ServletResponse {
@@ -9,4 +10,6 @@ public interface HttpServletResponse extends ServletResponse {
     void setContentType(String contentType);
 
     PrintWriter getWriter() throws IOException;
+
+    OutputStream getOutputStream();
 }

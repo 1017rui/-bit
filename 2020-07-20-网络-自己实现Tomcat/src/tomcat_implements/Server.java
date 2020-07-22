@@ -22,7 +22,7 @@ public class Server {
             // serverSocket 对应的 TCP 内部有个连接——连接1，状态是 LISTEN
 
             while (true) {
-                Socket socket = serverSocket.accept();
+                Socket socket = serverSocket.accept();  // <-- accept 等有人主动连接过来，并且完成三次握手
                 // socket 对应的 TCP 内部有一个新的连接——连接2，状态是 ESTABLISHED（三次握手已经完成）
                 // 连接2 从 连接1 中生了出来
 
