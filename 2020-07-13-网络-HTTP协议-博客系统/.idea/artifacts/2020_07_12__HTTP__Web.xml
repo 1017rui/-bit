@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="2020-07-12-网络-HTTP协议-博客系统:Web">
+    <output-path>$PROJECT_DIR$/out/artifacts/2020_07_12__HTTP__Web</output-path>
+    <root id="archive" name="2020-07-12-网络-HTTP协议-博客系统_Web.war">
+      <element id="artifact" artifact-name="2020-07-12-网络-HTTP协议-博客系统:Web exploded" />
+    </root>
+  </artifact>
+</component>
