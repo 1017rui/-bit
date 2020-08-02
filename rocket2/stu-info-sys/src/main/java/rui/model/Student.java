@@ -14,7 +14,7 @@ public class Student {
     private String studentNo;
     private String idCard;
     private String studentEmail;
-    private String classesId;
+    private Integer classesId;
     private Date createTime;
 
     private Classes classes;
