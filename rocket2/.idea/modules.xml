@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/maven-test/rocket2/maven-test.iml" filepath="$PROJECT_DIR$/maven-test/rocket2/maven-test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-study/spring-study.iml" filepath="$PROJECT_DIR$/spring-study/spring-study.iml" />
       <module fileurl="file://$PROJECT_DIR$/stu-info-sys/stu-info-sys.iml" filepath="$PROJECT_DIR$/stu-info-sys/stu-info-sys.iml" />
+      <module fileurl="file://$PROJECT_DIR$/听书FM/听书FM.iml" filepath="$PROJECT_DIR$/听书FM/听书FM.iml" />
     </modules>
   </component>
 </project>

@@ -9,12 +9,13 @@ import lombok.ToString;
 @ToString
 public class Response {
     private boolean success;//业务是否处理
+    private Integer total;//分页操作时需要的总数量
     private String code;//错误码
     private String message;//错误信息
     private Object data;//业务字段
     private String stackTrace;//出现异常时，堆栈信息
 
-    public boolean isSuccess() {
+   /* public boolean isSuccess() {
         return success;
     }
 
@@ -52,5 +53,5 @@ public class Response {
 
     public void setStackTrace(String stackTrace) {
         this.stackTrace = stackTrace;
-    }
+    }*/
 }

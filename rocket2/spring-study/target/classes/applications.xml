@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+        <!--通过bean标签定义的bean对象-->
+    <!--通过无参的构造方法，创建一个对象 -->
+    <bean id="bit" class="java.lang.String">
+        <constructor-arg value="小比特"></constructor-arg>
+
+    </bean>
+<!--    <bean class="java.lang.String"></bean>-->
+    <bean id="d1" class="rui.Duck">
+        <property name="name" value="LadyGaga"/>
+        <property name="age" value="20"/>
+    </bean>
+
+    <bean id="d2" class="rui.Duck2">
+        <constructor-arg name="n" value="烤鸭"/>
+        <constructor-arg name="a" value="2"/>
+    </bean>
+
+</beans>

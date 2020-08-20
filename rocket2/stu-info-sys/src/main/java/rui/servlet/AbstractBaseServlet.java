@@ -4,6 +4,7 @@ import rui.dao.DictionaryTagDAO;
 import rui.model.DictionaryTag;
 import rui.model.Response;
 import rui.util.JSONUtil;
+import rui.util.ThreadLocalHolder;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -35,6 +36,7 @@ public abstract class AbstractBaseServlet extends HttpServlet {
             r.setSuccess(true);
             r.setCode("COK200");
             r.setMessage("操作成功");
+            r.setTotal(ThreadLocalHolder.getTOTAL().get());//不管是否分页接口，都获取当前线程中的total变量
             r.setData(o);
         }catch (Exception e){
             r.setCode("ERR500");
@@ -45,6 +47,8 @@ public abstract class AbstractBaseServlet extends HttpServlet {
             String stackTrace=sw.toString();
             System.err.println(stackTrace);
             r.setStackTrace(stackTrace);
+        }finally {
+            ThreadLocalHolder.getTOTAL().remove();//在线程结束前，一定要记得删除操作，否则会存在内存泄漏
         }
         // r.setData(tags);
         pw.println(JSONUtil.write(r));
