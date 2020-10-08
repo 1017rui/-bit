@@ -23,7 +23,7 @@ public class WriteTemplateDemo {
         String s = "...";
         // buffer 中假设是有效数据
 
-        try (OutputStream os = new FileOutputStream("测试目录\\输出.txt")) {
+        try (OutputStream os = new FileOutputStream("测试目录\\输出.png")) {
             try (Writer writer = new OutputStreamWriter(os, "UTF-8")) {
                 /*
                 for (int i = 0; i < 8; i++) {
@@ -34,10 +34,16 @@ public class WriteTemplateDemo {
                 try (PrintWriter printWriter = new PrintWriter(writer)) {
                     printWriter.println(s);
                     printWriter.printf("想写什么写什么");
+                    printWriter.println();
+                    printWriter.printf("我爱你");
 
                     printWriter.flush();        // 刷新操作不要忘记
                 }
             }
         }
+    }
+
+    public static void main(String[] args) throws IOException {
+        字符数据();
     }
 }

@@ -6,14 +6,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="听书FM" />
         <module name="spring-study" />
         <module name="stu-info-sys" />
         <module name="maven-test" />
+        <module name="听书FM" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="1" target="1.5" />
+      <module name="Image" target="1.5" />
       <module name="javaee-study" target="1.5" />
       <module name="maven-test" target="1.8" />
       <module name="qwe" target="1.5" />

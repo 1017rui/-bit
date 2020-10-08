@@ -43,4 +43,12 @@ public class ReadTemplateDemo {
             }
         }
     }
+
+    public static void main(String[] args) {
+        try {
+            字符数据1();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
